@@ -1,0 +1,41 @@
+group 'kafka-publisher'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.bmuschko:gradle-docker-plugin:3.2.0"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.apache.kafka:kafka-clients:1.0.0'
+    compile 'ch.qos.logback:logback-classic:1.2.2'
+    compile 'com.amazonaws:aws-java-sdk:1.11.226'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+mainClassName = 'POCProducer'
+
+/** docker image generation **/
+apply plugin: 'com.bmuschko.docker-java-application'
+
+docker {
+    javaApplication {
+        maintainer = "platform-di@opengov.com"
+        tag = "opengovorg/kafka-publisher:${project.version}"
+    }
+}
+/** end docker image **/

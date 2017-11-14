@@ -1,0 +1,11 @@
+client/bin
+client/lib
+client/man
+client/include
+client/pip-selfcheck.json
+*/.Python
+.idea/libraries/*
+.gradle/*
+build/*
+out/*
+generated/*
